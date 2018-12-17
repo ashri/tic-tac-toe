@@ -15,8 +15,8 @@ public class BoardParserTest {
     @Before
     public void setup() {
         parser = new BoardParser();
+        parser.gameEngine = new GameEngine();
     }
-
 
     @Test
     public void testParseNullInput() {
@@ -80,7 +80,7 @@ public class BoardParserTest {
 
     @Test
     public void testParseOAlreadyWon() {
-        String input = "xoxox o  ";
+        String input = "xox ox o ";
         assertLogicFailure(input, "\"o\" already won");
     }
 

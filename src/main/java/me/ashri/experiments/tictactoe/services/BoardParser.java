@@ -1,12 +1,16 @@
 package me.ashri.experiments.tictactoe.services;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 
 import me.ashri.experiments.tictactoe.entities.Board;
 import me.ashri.experiments.tictactoe.entities.BoardValidationException;
 
 @RequestScoped
 public class BoardParser {
+
+    @Inject
+    GameEngine gameEngine;
 
     public Board parse(String boardInput) {
         if (boardInput != null) {
@@ -41,6 +45,13 @@ public class BoardParser {
         }
         if (crossCount > (naughtCount + 1)) {
             throw BoardValidationException.logicError("too many \"x\"");
+        }
+
+        if (gameEngine.hasWon(board, 'x')) {
+            throw BoardValidationException.logicError("\"x\" already won");
+        }
+        if (gameEngine.hasWon(board, 'o')) {
+            throw BoardValidationException.logicError("\"o\" already won");
         }
     }
 

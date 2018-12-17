@@ -48,6 +48,18 @@ public class Board implements Serializable {
         return empty.size();
     }
 
+    public Set<Integer> getCrosses() {
+        return crosses;
+    }
+
+    public Set<Integer> getNaughts() {
+        return naughts;
+    }
+
+    public Set<Integer> getEmpty() {
+        return empty;
+    }
+
     @Override
     public String toString() {
         return new String(values);
