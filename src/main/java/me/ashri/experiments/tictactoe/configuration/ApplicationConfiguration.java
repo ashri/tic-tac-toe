@@ -1,4 +1,4 @@
-package me.ashri.experiments.tictactoe;
+package me.ashri.experiments.tictactoe.configuration;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

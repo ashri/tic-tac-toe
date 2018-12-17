@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import me.ashri.experiments.tictactoe.entities.Board;
+import me.ashri.experiments.tictactoe.entities.BoardValidationException;
 import me.ashri.experiments.tictactoe.services.BoardParser;
 import me.ashri.experiments.tictactoe.services.GameEngine;
 
@@ -26,8 +27,15 @@ public class GameResource {
 
     @GET
     public Response game(@QueryParam("board") String boardInput) {
-        Board board = boardParser.parse(boardInput);
-        board = engine.nextMove(board);
-        return Response.ok().entity(board.toString()).build();
+        try {
+            Board board = boardParser.parse(boardInput);
+            board = engine.nextMove(board);
+            return Response.ok().entity(board.toString()).build();
+
+        } catch (BoardValidationException e) {
+            return Response.status(400)
+                    .entity(e.getMessage())
+                    .build();
+        }
     }
 }
