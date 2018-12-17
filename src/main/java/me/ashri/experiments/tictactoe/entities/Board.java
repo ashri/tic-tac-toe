@@ -65,4 +65,25 @@ public class Board implements Serializable {
         return new String(values);
     }
 
+    public String toFormattedString() {
+        StringBuilder out = new StringBuilder();
+        out.append(values[0]);
+        out.append('|');
+        out.append(values[1]);
+        out.append('|');
+        out.append(values[2]);
+        out.append("\n-+-+-\n");
+        out.append(values[3]);
+        out.append('|');
+        out.append(values[4]);
+        out.append('|');
+        out.append(values[5]);
+        out.append("\n-+-+-\n");
+        out.append(values[6]);
+        out.append('|');
+        out.append(values[7]);
+        out.append('|');
+        out.append(values[8]);
+        return out.toString();
+    }
 }

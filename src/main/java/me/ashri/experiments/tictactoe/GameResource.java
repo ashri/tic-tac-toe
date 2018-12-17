@@ -26,11 +26,22 @@ public class GameResource {
     GameEngine engine;
 
     @GET
-    public Response game(@QueryParam("board") String boardInput) {
+    public Response game(@QueryParam("board") String input) {
+        return play(input, false);
+    }
+
+    @GET
+    @Path("debug")
+    public Response debugGame(@QueryParam("board") String input) {
+        return play(input, true);
+    }
+
+    private Response play(String input, boolean formatBoard) {
         try {
-            Board board = boardParser.parse(boardInput);
+            Board board = boardParser.parse(input);
             board = engine.nextMove(board);
-            return Response.ok().entity(board.toString()).build();
+            String output = formatBoard ? board.toFormattedString() : board.toString();
+            return Response.ok().entity(output).build();
 
         } catch (BoardValidationException e) {
             return Response.status(400)
