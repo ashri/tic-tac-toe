@@ -1,4 +1,4 @@
 cd target
 unzip tictactoe-meecrowave-distribution.zip
-cd tictactoe-meecrowave-distribution
+cd tictactoe-distribution
 ./bin/meecrowave.sh run --http=$PORT
