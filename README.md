@@ -8,8 +8,8 @@ This example is built by TravisCI then deployed to Heroku.
 
 You will require a Java 8 install.
 
-`mvn clean tictactoe:run`
+`mvn clean package meecrowave:run`
 
 That will start the embedded server running on port 8080. To run on another port you can:
 
-`mvn clean tictactoe:run --port $PORT`
+`mvn clean package meecrowave:run --port $PORT`
