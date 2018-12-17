@@ -1,5 +1,7 @@
 package me.ashri.experiments.tictactoe.services;
 
+import java.util.Optional;
+
 import me.ashri.experiments.tictactoe.entities.Board;
 import org.junit.Assert;
 import org.junit.Before;
@@ -81,6 +83,30 @@ public class GameEngineTest {
     public void testNextMove() {
         Board board = new Board("         ".toCharArray());
         board = gameEngine.nextMove(board);
-        Assert.assertEquals("o        ", board.toString());
+        Assert.assertEquals("    o    ", board.toString());
+    }
+
+    @Test
+    public void testPlayBestWeightAtCenter() {
+        Board board = new Board("         ".toCharArray());
+        Optional<Integer> positionToPlay = gameEngine.playBestWeight(board);
+        Assert.assertTrue(positionToPlay.isPresent());
+        Assert.assertEquals(new Integer(4), positionToPlay.get());
+    }
+
+    @Test
+    public void testPlayBestWeightCornerWhenCenter() {
+        Board board = new Board("    x    ".toCharArray());
+        Optional<Integer> positionToPlay = gameEngine.playBestWeight(board);
+        Assert.assertTrue(positionToPlay.isPresent());
+        Assert.assertEquals(new Integer(0), positionToPlay.get());
+    }
+
+    @Test
+    public void testPlayBestWeightCornerWhenCornerAndCenter() {
+        Board board = new Board("o   x    ".toCharArray());
+        Optional<Integer> positionToPlay = gameEngine.playBestWeight(board);
+        Assert.assertTrue(positionToPlay.isPresent());
+        Assert.assertEquals(new Integer(2), positionToPlay.get());
     }
 }
