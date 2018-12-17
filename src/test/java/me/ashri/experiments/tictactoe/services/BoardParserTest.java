@@ -4,8 +4,10 @@ import me.ashri.experiments.tictactoe.entities.Board;
 import me.ashri.experiments.tictactoe.entities.BoardValidationException;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
 public class BoardParserTest {
 
     private BoardParser parser;
@@ -103,8 +105,15 @@ public class BoardParserTest {
     }
 
     @Test
-    public void testParseXTurnAhead() {
+    public void testParseXOneTurnAhead() {
         String input = "x xox o  ";
+        Board board = parser.parse(input);
+        Assert.assertNotNull(board);
+    }
+
+    @Test
+    public void testParseWhenUpperCase() {
+        String input = "X XOX O  ";
         Board board = parser.parse(input);
         Assert.assertNotNull(board);
     }
