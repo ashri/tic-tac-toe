@@ -28,7 +28,11 @@ public class GameEngine {
     }
 
     public Board nextMove(Board board) {
-        return board;
+        Set<Integer> empties = board.getEmpty();
+        int firstEmpty = empties.iterator().next();
+        char[] values = board.getValues();
+        values[firstEmpty] = 'o';
+        return new Board(values);
     }
 
     boolean hasWon(Board board, char player) {

@@ -48,6 +48,10 @@ public class Board implements Serializable {
         return empty.size();
     }
 
+    public char[] getValues() {
+        return values;
+    }
+
     public Set<Integer> getCrosses() {
         return crosses;
     }

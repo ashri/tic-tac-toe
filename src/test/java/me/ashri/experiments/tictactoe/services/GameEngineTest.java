@@ -76,4 +76,11 @@ public class GameEngineTest {
         Assert.assertFalse(gameEngine.hasWon(board, 'x'));
         Assert.assertTrue(gameEngine.hasWon(board, 'o'));
     }
+
+    @Test
+    public void testNextMove() {
+        Board board = new Board("         ".toCharArray());
+        board = gameEngine.nextMove(board);
+        Assert.assertEquals("o        ", board.toString());
+    }
 }
