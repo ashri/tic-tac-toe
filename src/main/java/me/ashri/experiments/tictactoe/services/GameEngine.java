@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.enterprise.context.RequestScoped;
 
 import me.ashri.experiments.tictactoe.entities.Board;
+import me.ashri.experiments.tictactoe.entities.BoardValidationException;
 
 @RequestScoped
 public class GameEngine {
@@ -29,6 +30,10 @@ public class GameEngine {
 
     public Board nextMove(Board board) {
         Set<Integer> empties = board.getEmpty();
+        if (empties.isEmpty()) {
+            throw BoardValidationException.logicError("no moves available");
+        }
+
         int firstEmpty = empties.iterator().next();
         char[] values = board.getValues();
         values[firstEmpty] = 'o';
