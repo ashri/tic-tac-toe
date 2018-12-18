@@ -45,12 +45,12 @@ public class GameEngine {
             throw BoardValidationException.logicError("no moves available");
         }
 
-        Optional<Integer> positionToPlay = checkForWin(board);
+        Optional<Integer> positionToPlay = checkForWin(board.getNaughts(), board.getEmpty());
         if (positionToPlay.isPresent()) {
             return updateBoard(board, positionToPlay.get());
         }
 
-        positionToPlay = checkToBlockWin(board);
+        positionToPlay = checkForWin(board.getCrosses(), board.getEmpty());
         if (positionToPlay.isPresent()) {
             return updateBoard(board, positionToPlay.get());
         }
@@ -77,7 +77,23 @@ public class GameEngine {
         return false;
     }
 
-    private Optional<Integer> checkForWin(Board board) {
+    private Optional<Integer> checkForWin(Set<Integer> moves, Set<Integer> empties) {
+        for (Integer[] winCondition : WINNING_CONDITIONS) {
+            Set<Integer> matchedWinConditions = new TreeSet<>();
+            for (Integer wc : winCondition) {
+                matchedWinConditions.add(wc);
+                if (moves.contains(wc)) {
+                    matchedWinConditions.remove(wc);
+                }
+            }
+            if (matchedWinConditions.size() == 1) {
+                Integer remainingWinCondition = matchedWinConditions.iterator().next();
+                if (empties.contains(remainingWinCondition)) {
+                    return Optional.of(remainingWinCondition);
+                }
+            }
+        }
+
         return Optional.empty();
     }
 

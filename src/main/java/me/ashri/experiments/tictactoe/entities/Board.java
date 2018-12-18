@@ -1,8 +1,8 @@
 package me.ashri.experiments.tictactoe.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Board implements Serializable {
 
@@ -13,9 +13,9 @@ public class Board implements Serializable {
 
     public Board(char[] values) {
         this.values = values;
-        this.crosses = new HashSet<>(9);
-        this.naughts = new HashSet<>(9);
-        this.empty = new HashSet<>(9);
+        this.crosses = new TreeSet<>();
+        this.naughts = new TreeSet<>();
+        this.empty = new TreeSet<>();
         process(values);
     }
 
