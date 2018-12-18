@@ -109,4 +109,42 @@ public class GameEngineTest {
         Assert.assertTrue(positionToPlay.isPresent());
         Assert.assertEquals(new Integer(2), positionToPlay.get());
     }
+
+    @Test
+    public void testPlayWinningMove() {
+        Board board = new Board("o o x   x".toCharArray());
+        board = gameEngine.nextMove(board);
+        Assert.assertEquals("ooo x   x", board.toString());
+
+        board = new Board("ox ox   x".toCharArray());
+        board = gameEngine.nextMove(board);
+        Assert.assertEquals("ox ox o x", board.toString());
+
+        board = new Board(" x oo   x".toCharArray());
+        board = gameEngine.nextMove(board);
+        Assert.assertEquals(" x ooo  x", board.toString());
+
+        board = new Board("    oxox ".toCharArray());
+        board = gameEngine.nextMove(board);
+        Assert.assertEquals("  o oxox ", board.toString());
+    }
+
+    @Test
+    public void testPlayBlockingMove() {
+        Board board = new Board("x x o   o".toCharArray());
+        board = gameEngine.nextMove(board);
+        Assert.assertEquals("xox o   o", board.toString());
+
+        board = new Board("xo x    o".toCharArray());
+        board = gameEngine.nextMove(board);
+        Assert.assertEquals("xo x  o o", board.toString());
+
+        board = new Board(" o xx   o".toCharArray());
+        board = gameEngine.nextMove(board);
+        Assert.assertEquals(" o xxo  o", board.toString());
+
+        board = new Board("    xoxo ".toCharArray());
+        board = gameEngine.nextMove(board);
+        Assert.assertEquals("  o xoxo ", board.toString());
+    }
 }
